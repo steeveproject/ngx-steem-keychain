@@ -1,0 +1,4 @@
+/**
+ * @license ngx-steem-keychain
+ * MIT license
+ */
