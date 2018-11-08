@@ -39,6 +39,6 @@
         "annotateForClosureCompiler": true,
         "strictMetadataEmit": true,
         "flatModuleOutFile": "ngx-steem-keychain.js",
-        "flatModuleId": "ngx-steem-keychain"
+        "flatModuleId": "@steeveproject/ngx-steem-keychain"
     }
 }
