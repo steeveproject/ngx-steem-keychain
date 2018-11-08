@@ -84,6 +84,8 @@ export class SteemKeychainService {
     key?: KeyType
   ): Observable<Response> {
 
+    key = key || 'Posting';
+
     return this.call('requestCustomJson', [
       account,
       id,
