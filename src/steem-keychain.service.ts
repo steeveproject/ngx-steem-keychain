@@ -145,10 +145,10 @@ export class SteemKeychainService {
       const cb = (res: Response) => this.ngZone.run(() => {
         if (res.success) {
           observer.next(res);
+          observer.complete();
         } else {
           observer.error(new SteemKeychainError(res));
         }
-        observer.complete();
       });
 
       if (callbackIndex) {
