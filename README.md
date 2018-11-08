@@ -21,7 +21,7 @@ export class FoobarComponent {
         private steemKeychain: SteemKeychainService
     ) { }
 
-    doKeychainHandshake(): Observable<Result> {
+    doKeychainHandshake(): Observable<Response> {
         return this.steemKeychain.requestHandshake();
     }
 }
