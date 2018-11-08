@@ -1,10 +1,10 @@
-import { Result } from './result';
+import { Response } from './response';
 
 
 export class SteemKeychainError extends Error {
 
-    constructor(public result: Result) {
-        super(result.message);
-        Object.setPrototypeOf(this, SteemKeychainError.prototype);
-    }
+  constructor(public response: Response) {
+    super(response.message);
+    Object.setPrototypeOf(this, SteemKeychainError.prototype);
+  }
 }

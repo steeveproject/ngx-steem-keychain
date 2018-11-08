@@ -2,7 +2,7 @@ import { Injectable, NgZone } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { Result } from './result';
+import { Response } from './response';
 import { SteemKeychainError } from './steem-keychain-error';
 
 
@@ -26,11 +26,11 @@ export class SteemKeychainService {
     return (<any>window).steem_keychain !== undefined;
   }
 
-  requestHandshake(): Observable<Result> {
+  requestHandshake(): Observable<Response> {
       return this.call('requestHandshake', []);
   }
 
-  requestVerifyKey(account: string, encryptedMessage: string, keyType: KeyType): Observable<Result> {
+  requestVerifyKey(account: string, encryptedMessage: string, keyType: KeyType): Observable<Response> {
     return this.call('requestVerifyKey', [
       account,
       encryptedMessage,
@@ -47,7 +47,7 @@ export class SteemKeychainService {
     body: string,
     jsonMetadata: string = '',
     options: string = ''
-  ): Observable<Result> {
+  ): Observable<Response> {
 
     return this.call('requestPost', [
       author,
@@ -66,7 +66,7 @@ export class SteemKeychainService {
     author: string,
     permlink: string,
     weight: number
-  ): Observable<Result> {
+  ): Observable<Response> {
 
     return this.call('requestVote', [
       voter,
@@ -82,7 +82,7 @@ export class SteemKeychainService {
     id: string,
     customJson: string,
     key?: KeyType
-  ): Observable<Result> {
+  ): Observable<Response> {
 
     return this.call('requestCustomJson', [
       account,
@@ -94,21 +94,21 @@ export class SteemKeychainService {
   }
 
   requestTransfer(
-      from: string,
-      to: string,
-      amount: number,
-      memo: string,
-      currency: Currency,
-      enforce: boolean = false
-  ): Observable<Result> {
+    from: string,
+    to: string,
+    amount: number,
+    memo: string,
+    currency: Currency,
+    enforce: boolean = false
+  ): Observable<Response> {
 
     return this.call('requestTransfer', [
-        from,
-        to,
-        amount,
-        memo,
-        currency,
-        enforce,
+      from,
+      to,
+      amount,
+      memo,
+      currency,
+      enforce,
     ], 4);
   }
 
@@ -117,13 +117,13 @@ export class SteemKeychainService {
     delegatee: string,
     amount: number,
     unit: DelegationUnit
-  ): Observable<Result> {
+  ): Observable<Response> {
 
     return this.call('requestDelegation', [
-        delegator,
-        delegatee,
-        amount,
-        unit
+      delegator,
+      delegatee,
+      amount,
+      unit
     ]);
   }
 
@@ -132,7 +132,7 @@ export class SteemKeychainService {
    * It should not be used directly since it is not type-safe,
    * but it can be bandy in case there is a method not implemented yet.
    */
-  call(method: string, args: any[], callbackIndex?: number): Observable<Result> {
+  call(method: string, args: any[], callbackIndex?: number): Observable<Response> {
     return Observable.create((observer: any) => {
       // Make sure the extension is available.
       if (!this.steemKeychainAvailable) {
@@ -142,7 +142,7 @@ export class SteemKeychainService {
       }
 
       // Push the callback to the argument list.
-      const cb = (res: Result) => this.ngZone.run(() => {
+      const cb = (res: Response) => this.ngZone.run(() => {
         if (res.success) {
           observer.next(res);
         } else {
