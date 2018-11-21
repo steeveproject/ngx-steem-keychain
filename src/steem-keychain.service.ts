@@ -2,8 +2,10 @@ import { Injectable, NgZone } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { Response } from './response';
 import { SteemKeychainError } from './errors/steem-keychain-error';
+
+import { Response } from './response';
+import { Operation } from './operation';
 
 
 export type KeyType = 'Memo' | 'Posting' | 'Active';
@@ -34,6 +36,39 @@ export class SteemKeychainService {
     return this.call('requestVerifyKey', [
       account,
       encryptedMessage,
+      keyType
+    ]);
+  }
+
+  /*
+   * requestSignBuffer wraps the associated Steem Keychain call.
+   * In case message is a string, it is turned into a Buffer by calling new Buffer(message).
+   */
+  requestSignBuffer(account: string, message: Buffer | string, keyType: KeyType): Observable<Response> {
+    if (typeof message === 'string') {
+      message = new Buffer(message);
+    }
+
+    return this.call('requestSignBuffer', [
+      account,
+      message,
+      keyType
+    ]);
+  }
+
+  requestBroadcast(account: string, operations: Operation[], keyType: KeyType): Observable<Response> {
+    return this.call('requestBroadcast', [
+      account,
+      operations.map(op => op.toArray()),
+      keyType
+    ]);
+  }
+
+  requestSignedCall(account: string, method: string, params: any, keyType: KeyType): Observable<Response> {
+    return this.call('requestSignedCall', [
+      account,
+      method,
+      params,
       keyType
     ]);
   }
