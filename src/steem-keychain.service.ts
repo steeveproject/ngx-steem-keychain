@@ -40,15 +40,7 @@ export class SteemKeychainService {
     ]);
   }
 
-  /*
-   * requestSignBuffer wraps the associated Steem Keychain call.
-   * In case message is a string, it is turned into a Buffer by calling new Buffer(message).
-   */
-  requestSignBuffer(account: string, message: Buffer | string, keyType: KeyType): Observable<Response> {
-    if (typeof message === 'string') {
-      message = new Buffer(message);
-    }
-
+  requestSignBuffer(account: string, message: string, keyType: KeyType): Observable<Response> {
     return this.call('requestSignBuffer', [
       account,
       message,
