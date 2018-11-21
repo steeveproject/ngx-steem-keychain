@@ -40,7 +40,7 @@ export class SteemKeychainService {
     ]);
   }
 
-  requestSignBuffer(account: string, message: string, keyType: KeyType): Observable<Response> {
+  requestSignBuffer(account: string, message: string | Buffer, keyType: KeyType): Observable<Response> {
     return this.call('requestSignBuffer', [
       account,
       message,
