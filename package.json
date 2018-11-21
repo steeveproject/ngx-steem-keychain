@@ -17,7 +17,7 @@
         "test:watch": "karma start karma.conf.js --single-run false",
         "pack:lib": "npm run build && npm pack ./dist",
         "publish:lib": "npm run build && npm publish --access=public ./dist",
-        "publish:lib:next": "npm run build && npm publish --tag next ./dist",
+        "publish:lib:next": "npm run build && npm publish --access=public --tag next ./dist",
         "compodoc": "compodoc -p tsconfig.json",
         "compodoc:serve": "compodoc -s"
     },
