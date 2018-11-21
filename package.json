@@ -1,7 +1,7 @@
 {
     "name": "@steeveproject/ngx-steem-keychain",
     "private": false,
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "Your Angular interface to Steem Keychain",
     "main": "./bundles/ngx-steem-keychain.umd.js",
     "module": "./fesm5/ngx-steem-keychain.js",
