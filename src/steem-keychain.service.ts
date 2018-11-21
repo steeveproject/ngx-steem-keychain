@@ -3,7 +3,7 @@ import { Injectable, NgZone } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Response } from './response';
-import { SteemKeychainError } from './steem-keychain-error';
+import { SteemKeychainError } from './errors/steem-keychain-error';
 
 
 export type KeyType = 'Memo' | 'Posting' | 'Active';
